@@ -6,8 +6,8 @@ module.exports = {
       const { user_id, page = 1 } = req.query;
       
       const query = knex('projects')
-      // .limit(3)
-      // .offset((page - 1) * 3);
+      .limit(3)
+      .offset((page - 1) * 3);
       
       const countObject = knex('projects').count();
 
