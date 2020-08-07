@@ -6,8 +6,8 @@ module.exports = {
       const { user_id, page = 1 } = req.query;
       
       const query = knex('projects')
-      .limit(3)
-      .offset((page - 1) * 3);
+      // .limit(3)
+      // .offset((page - 1) * 3);
       
       const countObject = knex('projects').count();
 
@@ -15,7 +15,8 @@ module.exports = {
         query
         .where({ user_id })
         .join('users', 'users.id', '=', 'projects.user_id')
-        .select('projects.*', 'users.username');
+        .select('projects.*', 'users.username')
+        .where('users.deleted_at', null);
 
         countObject
         .where({ user_id })
